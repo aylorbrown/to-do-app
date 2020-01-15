@@ -9,12 +9,11 @@ insert into events
 VALUES
     ('thanksgiving', 'my house', '2020-01-17', '05:00 PM');
 
-insert into userID_eventID 
-    (user_id, event_id)
-VALUES
-    (37, 43);
+-- insert into userID_eventID 
+--     (user_id, event_id)
+--     ;
 
-insert into tasks 
-    (event_id, user_id)
-Values (43, 37);
+-- insert into tasks 
+--     (event_id, user_id)
+--     ;
 

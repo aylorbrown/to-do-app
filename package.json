@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "nodemon --ignore './sessions/' index.js",
+    "dev": "nodemon index.js",
     "db:delete": "dropdb to-do-app",
     "db:create": "createdb to-do-app",
     "db:schema": "psql -f schema.sql to-do-app",
@@ -22,5 +22,12 @@
   "bugs": {
     "url": "https://github.com/aylorbrown/to-do-app/issues"
   },
-  "homepage": "https://github.com/aylorbrown/to-do-app#readme"
+  "homepage": "https://github.com/aylorbrown/to-do-app#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "pg-promise": "^10.3.5"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.2"
+  }
 }
