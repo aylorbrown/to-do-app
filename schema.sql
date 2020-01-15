@@ -4,7 +4,7 @@ create TABLE users (
     last_name text,
     organization_name text,
     email text,
-    phone_number VARCHAR(12),
+    phone_number VARCHAR(12)
 );
 
 create TABLE events (
@@ -12,7 +12,7 @@ create TABLE events (
     event_name text,
     event_location text,
     event_date date,
-    event_time time, 
+    event_time time
 );
 
 create TABLE userID_eventID (

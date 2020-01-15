@@ -11,10 +11,8 @@ VALUES
 
 insert into userID_eventID 
     (user_id, event_id)
-VALUES
-    (37, 43);
+
 
 insert into tasks 
     (event_id, user_id)
-Values (43, 37);
 
