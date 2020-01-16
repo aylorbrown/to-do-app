@@ -25,20 +25,35 @@ app.get('/', (req, res) => {
     res.render('home');
 });
 
-//create User
 
-app.get('/create', (req, res) => {
-    res.render('createUser');
+//create User
+app.get('/create', (req, res) => { 
+    let errorMsg = ''
+    if (req.query.msg === 'usernameTaken') {
+        errorMsg = 'This username is already taken.'
+    }
+    res.render('createUser', {
+        locals: {
+            errorMsg
+        }
+    });
+
 })
 
 app.post('/create', parseForm, async (req, res) => {
-    const {firstName, lastName, organization, email, phoneNumber, password} = req.body;
+    const {firstName, lastName, organization, email, phoneNumber, userName, password} = req.body;
     console.log(req.body);
+    console.log(req.query.msg);
 
-    const userID = await user.createUser(firstName, lastName, organization, email, phoneNumber, password);
+    try {
+        const userID = await user.createUser(firstName, lastName, organization, email, phoneNumber, userName, password);
+        res.redirect('/login')
+       
+    } catch (err) {
+        res.redirect('/create?msg=usernameTaken')
+    }
 
 })
-
 
 
 //login 
@@ -46,10 +61,40 @@ app.get('/login', (req, res) => {
     res.render('login');
 });
 
-app.post('/login', parseForm, (req, res) => {
-    const { firstName, lastName, password } = req.body;
+
+app.post('/login', parseForm, async (req, res) => {
+    const { userName, password } = req.body;
     console.log(req.body);
+
+    // try checks for username to match in db
+    try {
+        const isUserValid = await user.userLogin(userName, password);
+
+        // if/else check for password to match in db
+        if (isUserValid) {
+            res.redirect('/profile')
+        }else{
+            res.redirect('/login') 
+        };
+        
+    } catch (err) {
+        res.redirect('/login')
+    }
+
 });
+
+
+// profile
+app.get('/profile', (req, res) => {
+    res.render('profile');
+});
+
+
+
+
+
+
+
 
 //logout 
 

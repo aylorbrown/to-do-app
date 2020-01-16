@@ -7,40 +7,55 @@
     <title>Document</title>
 </head>
 <body>
-        <form method="POST">
-                <label>
-                  First Name:
-                  <input name="firstName" required>
-                </label>
-                <br>
-                <label>
-                Last Name:
-                <input name="lastName"  required>
-                </label>
-                <br>
-                <label>
-                Organization:
-                <input name="organization" type="text">
-                </label>
-                <br>
-                <label>
-                    Email:
-                    <input name="email" type="text" required>
-                </label>
-                <br>
-                <label>
-                    Phone Number:
-                    <input type="text" name="phoneNumber"  required>
-                    </label>
-                    <br>
-                      <label>
-                  Password:
-                  <input type="password" name="password"  required >
-                </label>
-                <br>
-                <input type="submit" value="login" >
-        
-              </form>
+  <p class="error-msg">
+    ${errorMsg}
+  </p>
+  <form method="POST">
+    <label>
+      First Name:
+      <input name="firstName" required>
+    </label>
+    <br>
+
+    <label>
+      Last Name:
+      <input name="lastName"  required>
+    </label>
+    <br>
+
+    <label>
+      Organization:
+      <input name="organization" type="text">
+    </label>
+    <br>
+
+    <label>
+      Email:
+        <input name="email" type="text" required>
+    </label>
+    <br>
+
+    <label>
+      Phone Number:
+      <input type="text" name="phoneNumber"  required>
+    </label>
+    <br>
+
+    <label>
+      Username:
+      <input type="userName" name="userName" required>
+    </label>
+    <br>
+    
+    <label>
+      Password:
+      <input type="password" name="password"  required >
+    </label>
+    <br>
+
+    <input type="submit" value="login" >
+
+  </form>
     
 </body>
 </html>
