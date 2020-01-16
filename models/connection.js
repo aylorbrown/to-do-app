@@ -15,10 +15,5 @@ module.exports = db;
 
 
 
-//require npm install pg-promise
-//
-
-
-
 
 

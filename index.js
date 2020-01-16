@@ -15,6 +15,8 @@ const parseForm = bodyParser.urlencoded({
     extended: true
 });
 
+const user = require('./models/user')
+
 const PORT = 3000;
 
 //home 
@@ -23,9 +25,25 @@ app.get('/', (req, res) => {
     res.render('home');
 });
 
+//create User
+
+app.get('/create', (req, res) => {
+    res.render('createUser');
+})
+
+app.post('/create', parseForm, async (req, res) => {
+    const {firstName, lastName, organization, email, phoneNumber, password} = req.body;
+    console.log(req.body);
+
+    const userID = await user.createUser(firstName, lastName, organization, email, phoneNumber, password);
+
+})
+
+
+
 //login 
 app.get('/login', (req, res) => {
-    res.render('form');
+    res.render('login');
 });
 
 app.post('/login', parseForm, (req, res) => {
