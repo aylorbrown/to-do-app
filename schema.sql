@@ -5,6 +5,7 @@ create TABLE users (
     organization_name text,
     email text,
     phone_number VARCHAR(12),
+    user_name text unique not null,
     password text   
 );
 
@@ -28,3 +29,4 @@ create TABLE tasks (
     user_id INTEGER REFERENCES users(user_id),
     task text
 );
+
