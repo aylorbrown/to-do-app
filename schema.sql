@@ -4,7 +4,8 @@ create TABLE users (
     last_name text,
     organization_name text,
     email text,
-    phone_number VARCHAR(12)
+    phone_number VARCHAR(12),
+    password text   
 );
 
 create TABLE events (
