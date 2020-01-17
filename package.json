@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "nodemon index.js",
+    "dev": "nodemon --ignore './sessions/' index.js",
     "db:delete": "dropdb to-do-app",
     "db:create": "createdb to-do-app",
     "db:schema": "psql -f schema.sql to-do-app",

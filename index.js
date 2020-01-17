@@ -21,12 +21,20 @@ const session = require('express-session'); //session management middleware
 const fileStore = require('session-file-store')(session); // modified version of middleware management and helps save session to file of hard drive
 
 
-// 
+
+// SESSION MANAGEMENT
 app.use(session({
     store: new fileStore({}),
     secret: '76260r57650fd743046561076' // must move into secure location
 }));
 
+app.use((req, res, next) =>  {
+    console.log('***********');
+    console.log(req.session);
+    console.log('***********');
+
+    next();
+});
 
 
 
