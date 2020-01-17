@@ -29,7 +29,10 @@ function createHash(password) {
 
 async function userLogin(username, password) {
     const theUser = await getByUsername(username);
-    return bcrypt.compareSync(password, theUser.password)
+    return {
+        isUserValid: bcrypt.compareSync(password, theUser.password), 
+        theUser
+    }
 };
 async function getByUsername(username) {
     const theUser = await db.one(`

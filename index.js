@@ -94,7 +94,7 @@ app.post('/login', parseForm, async (req, res) => {
     console.log(req.body);
 
     try { // try: checks if username has match in db
-        const isUserValid = await user.userLogin(username, password);
+        const {isUserValid, theUser} = await user.userLogin(username, password);
         console.log(isUserValid);
         console.log(isUserValid);
 
@@ -102,12 +102,13 @@ app.post('/login', parseForm, async (req, res) => {
         // if/else checks if password has match in db
         if (isUserValid)  {
             // add info to user session
-            req.session.user= {
-                username,
-                password,
-                id: theUser.id
+            console.log("before req.session.user")
+            req.session.user= { // the user object is being created 
+                username: theUser.user_name,
+                id: theUser.user_id,
+                name: theUser.first_name
             };
-
+            console.log("hits req session")
             req.session.save(() => {
                 console.log('The session is now saved!!!');
                 // This avoids a long-standing
@@ -120,7 +121,8 @@ app.post('/login', parseForm, async (req, res) => {
         };
 
     } catch (err) {
-        res.redirect('/login?msg=loginInvalid')
+        // res.redirect('/login?msg=loginInvalid')
+        console.log(err)
     };
 });
 
