@@ -43,7 +43,14 @@ async function getByUsername(username) {
 
 
 
+// SAVED EVENTS
 
+// async function getSavedEvents(username) {
+//     const theUser = await db.one(`
+//         select * from users where user_name=$1
+//     `, [username]);
+//     return theUser;
+// };
 
 
 

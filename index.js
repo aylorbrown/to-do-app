@@ -21,7 +21,7 @@ const parseForm = bodyParser.urlencoded({
 const session = require('express-session'); //session management middleware
 const fileStore = require('session-file-store')(session); // modified version of middleware management and helps save session to file of hard drive
 
-const user = require('./models/user');
+
 //************TRAVIS*******//
 //pulls in functions from events.js//
 const events = require('./models/events');
@@ -50,8 +50,15 @@ app.use((req, res, next) =>  {
 
 // HOME 
 app.get('/', (req, res) => {
-    console.log('You are home!');
-    res.render('home');
+    let errorMsg = ''
+    if (req.query.msg === 'userLogout') {
+        errorMsg = 'You have been signed out!'
+    }
+    res.render('home', {
+        locals: {
+            errorMsg
+        }
+    });
 });
 
 
@@ -188,7 +195,17 @@ app.post('/profile/createevent', parseForm, async (req, res) => {
 
 
 //LOGOUT 
-
+app.get('/logout', (req, res) => {
+    // Get rid of the user's session!
+    // Then redirect them to the home page.
+    req.session.destroy(() => {
+        console.log('The session is now destroyed!!!');
+        // This avoids a long-standing
+        // bug in the session middleware
+        res.redirect('/?msg=userLogout');
+    });
+    
+})
 
 
 
