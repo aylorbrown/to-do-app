@@ -131,7 +131,7 @@ app.post('/login', parseForm, async (req, res) => {
 // PROFILE
 app.get('/profile', (req, res) => {
     res.render('profile');
-    res.send(`Welcome back ${req.session.user.name}`)
+    // res.send(`Welcome back ${req.session.user.name}`) if you want to send user session info to page
 });
 
 
