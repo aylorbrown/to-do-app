@@ -117,11 +117,11 @@ app.post('/login', parseForm, async (req, res) => {
             });
 
         } else {
-            res.redirect('/login') 
+            res.redirect('/login?msg=loginInvalid') 
         };
 
     } catch (err) {
-        // res.redirect('/login?msg=loginInvalid')
+        res.redirect('/login?msg=loginInvalid')
         console.log(err)
     };
 });
@@ -131,6 +131,7 @@ app.post('/login', parseForm, async (req, res) => {
 // PROFILE
 app.get('/profile', (req, res) => {
     res.render('profile');
+    res.send(`Welcome back ${req.session.user.name}`)
 });
 
 
