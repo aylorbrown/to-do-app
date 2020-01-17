@@ -60,12 +60,12 @@ app.get('/signup', (req, res) => {
 });
 
 app.post('/signup', parseForm, async (req, res) => {
-    const {firstName, lastName, organization, email, phoneNumber, userName, password} = req.body;
+    const {firstName, lastName, organization, email, phoneNumber, username, password} = req.body;
     console.log(req.body);
     console.log(req.query.msg);
 
     try {
-        const userID = await user.createUser(firstName, lastName, organization, email, phoneNumber, userName, password);
+        const userID = await user.createUser(firstName, lastName, organization, email, phoneNumber, username, password);
         res.redirect('/login')
        
     } catch (err) {
@@ -90,15 +90,31 @@ app.get('/login', (req, res) => {
 });
 
 app.post('/login', parseForm, async (req, res) => {
-    const { userName, password } = req.body;
+    const { username, password } = req.body;
     console.log(req.body);
 
     try { // try: checks if username has match in db
-        const isUserValid = await user.userLogin(userName, password);
+        const isUserValid = await user.userLogin(username, password);
+        console.log(isUserValid);
+        console.log(isUserValid);
+
 
         // if/else checks if password has match in db
-        if (isUserValid) {
-            res.redirect('/profile')
+        if (isUserValid)  {
+            // add info to user session
+            req.session.user= {
+                username,
+                password,
+                id: theUser.id
+            };
+
+            req.session.save(() => {
+                console.log('The session is now saved!!!');
+                // This avoids a long-standing
+                // bug in the session middleware
+                res.redirect('/profile');
+            });
+
         } else {
             res.redirect('/login') 
         };
