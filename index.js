@@ -1,10 +1,11 @@
 const http = require('http');
 const express = require('express');
 const app = express();
-const PORT = 3000;
 const server = http.createServer(app);
+const PORT = 3000;
 
 const db = require('./models/connection');
+const user = require('./models/user')
 
 const es6Renderer = require('express-es6-template-engine');
 app.engine('html', es6Renderer);
@@ -16,8 +17,16 @@ const parseForm = bodyParser.urlencoded({
     extended: true
 });
 
-const user = require('./models/user')
-const session = require('express-session'); //session 
+const session = require('express-session'); //session management middleware
+const fileStore = require('session-file-store')(session); // modified version of middleware management and helps save session to file of hard drive
+
+
+// 
+app.use(session({
+    store: new fileStore({}),
+    secret: '76260r57650fd743046561076' // must move into secure location
+}));
+
 
 
 
