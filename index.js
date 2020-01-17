@@ -17,8 +17,18 @@ const parseForm = bodyParser.urlencoded({
     extended: true
 });
 
+
 const session = require('express-session'); //session management middleware
 const fileStore = require('session-file-store')(session); // modified version of middleware management and helps save session to file of hard drive
+
+const user = require('./models/user');
+//************TRAVIS*******//
+//pulls in functions from events.js//
+const events = require('./models/events');
+
+
+
+
 
 
 
@@ -137,6 +147,38 @@ app.get('/profile', (req, res) => {
     // res.send(`Welcome back ${req.session.user.name}`) if you want to send user session info to page
     })
 });
+
+
+//****TRAVIS******/
+//below is for listing all events from your  profile page
+
+app.get('/profile/listevents', async (req, res) =>{
+    const allEvents = await events.listEvents();
+    console.log(allEvents);
+    res.send(allEvents);
+});
+
+app.get('/profile/createevent', async (req, res) => {
+    res.render('createEvent');
+})
+
+app.post('/profile/createevent', parseForm, async (req, res) => {
+    const {eventName, eventLocation, eventDate, eventTime, eventDescription} = req.body;
+    try{
+     console.log(req.body);
+     const newEvent = await events.createEvent(eventName, eventLocation, eventDate, eventTime, eventDescription);
+    //  newEvent.command === "INSERT" && newEvent.rowCount >= 1;   
+    //  console.log(newEvent.command);
+    
+    }
+
+    catch (err){
+        console.log(err);
+    }
+    
+})
+
+
 
 
 

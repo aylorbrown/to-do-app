@@ -14,7 +14,8 @@ create TABLE events (
     event_name text,
     event_location text,
     event_date date,
-    event_time time 
+    event_time time,
+    event_description text 
 );
 
 create TABLE userID_eventID (
