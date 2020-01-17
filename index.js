@@ -1,6 +1,7 @@
 const http = require('http');
 const express = require('express');
 const app = express();
+const PORT = 3000;
 const server = http.createServer(app);
 
 const db = require('./models/connection');
@@ -16,31 +17,32 @@ const parseForm = bodyParser.urlencoded({
 });
 
 const user = require('./models/user')
+const session = require('express-session'); //session 
 
-const PORT = 3000;
 
-//home 
+
+// HOME 
 app.get('/', (req, res) => {
     console.log('You are home!');
     res.render('home');
 });
 
 
-//create User
-app.get('/create', (req, res) => { 
+
+// SIGNUP
+app.get('/signup', (req, res) => { 
     let errorMsg = ''
     if (req.query.msg === 'usernameTaken') {
         errorMsg = 'This username is already taken.'
     }
-    res.render('createUser', {
+    res.render('signup', {
         locals: {
             errorMsg
         }
     });
+});
 
-})
-
-app.post('/create', parseForm, async (req, res) => {
+app.post('/signup', parseForm, async (req, res) => {
     const {firstName, lastName, organization, email, phoneNumber, userName, password} = req.body;
     console.log(req.body);
     console.log(req.query.msg);
@@ -50,41 +52,48 @@ app.post('/create', parseForm, async (req, res) => {
         res.redirect('/login')
        
     } catch (err) {
-        res.redirect('/create?msg=usernameTaken')
-    }
-
-})
-
-
-//login 
-app.get('/login', (req, res) => {
-    res.render('login');
+        res.redirect('/signup?msg=usernameTaken')
+    };
 });
 
+
+
+// LOGIN
+app.get('/login', (req, res) => {
+    let errorMsg = ''
+    if (req.query.msg === 'loginInvalid') {
+        errorMsg = 'Username or password is invalid.'
+    }
+    res.render('login', {
+        locals: {
+            errorMsg
+        }
+    });
+
+});
 
 app.post('/login', parseForm, async (req, res) => {
     const { userName, password } = req.body;
     console.log(req.body);
 
-    // try checks for username to match in db
-    try {
+    try { // try: checks if username has match in db
         const isUserValid = await user.userLogin(userName, password);
 
-        // if/else check for password to match in db
+        // if/else checks if password has match in db
         if (isUserValid) {
             res.redirect('/profile')
-        }else{
+        } else {
             res.redirect('/login') 
         };
-        
-    } catch (err) {
-        res.redirect('/login')
-    }
 
+    } catch (err) {
+        res.redirect('/login?msg=loginInvalid')
+    };
 });
 
 
-// profile
+
+// PROFILE
 app.get('/profile', (req, res) => {
     res.render('profile');
 });
@@ -96,7 +105,7 @@ app.get('/profile', (req, res) => {
 
 
 
-//logout 
+//LOGOUT 
 
 
 
