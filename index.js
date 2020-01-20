@@ -1,5 +1,6 @@
 const http = require('http');
 const express = require('express');
+const path = require('path');
 const app = express();
 const server = http.createServer(app);
 const PORT = 3000;
@@ -11,6 +12,9 @@ const es6Renderer = require('express-es6-template-engine');
 app.engine('html', es6Renderer);
 app.set('views', 'templates');
 app.set('view engine', 'html');
+app.use(express.static(path.join(__dirname, 'public')));
+
+
 
 const bodyParser = require('body-parser');
 const parseForm = bodyParser.urlencoded({
@@ -21,7 +25,6 @@ const parseForm = bodyParser.urlencoded({
 const session = require('express-session'); //session management middleware
 const fileStore = require('session-file-store')(session); // modified version of middleware management and helps save session to file of hard drive
 
-const user = require('./models/user');
 //************TRAVIS*******//
 //pulls in functions from events.js//
 const events = require('./models/events');
