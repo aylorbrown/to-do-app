@@ -183,7 +183,7 @@ app.post('/profile/createevent', parseForm, async (req, res) => {
     } catch (err){
         console.log(err);
     }
-})
+});
 
 // < STEP 2 > 
 // Create Event Task - PAGE
@@ -214,7 +214,12 @@ app.post('/profile/createevent/:eventID(\\d+)/createtask', parseForm, async (req
 
 
 // --- VIEW YOUR EVENTS
-
+app.get('/profile/:userID/viewmyevents', async (req, res) => {
+    const userID = req.session.user.id;
+    const viewMyEvents = await db.events.viewMyEvents(userID);
+    console.log(viewMyEvents);
+    res.send(viewMyEvents);
+})
 
 
 

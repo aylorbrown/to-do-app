@@ -44,7 +44,13 @@ async function createTask(taskList,eventID){
 }
 
 // --- VIEW YOUR EVENTS
-
+async function viewMyEvents(userID) {
+    const result = await db.one(`
+        select * from events where user_id=$1
+    `, [userID]);
+    console.log(result);
+    return result;
+}
 
 
 // --- SIGN UP FOR TASK
@@ -71,4 +77,5 @@ module.exports= {
     listEvents,
     createEvent,
     createTask,
+    viewMyEvents
 }
