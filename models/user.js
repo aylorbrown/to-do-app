@@ -2,7 +2,7 @@ const db = require('./connection');
 const bcrypt = require('bcryptjs')
 
 
-// CREATE A USER (Create) 
+// --- CREATE A USER (Create) 
 async function createUser(firstName, lastName, organization, email, phoneNumber, userName, password) {
     const hash = createHash(password); 
     const result = await db.one(`
@@ -13,18 +13,19 @@ async function createUser(firstName, lastName, organization, email, phoneNumber,
         returning user_id
     `, [firstName, lastName, organization, email, phoneNumber, userName, hash]);
     
+    console.log(`user_id = ${result.user_id}`)
     return result.user_id;
 };
 
 
-// HASH USER PASSWORD
+// --- HASH USER PASSWORD
 function createHash(password) {
     const salt =bcrypt.genSaltSync(10); 
     return bcrypt.hashSync(password, salt);
 };
 
 
-// USER LOGIN (Retrieve) 
+// --- USER LOGIN (Retrieve) 
     // userLogin: Runs getByUsername and retrieves username in db = to username given in form, then decrypts incrypted password in database and retrieves password = to password given in form
 
 async function userLogin(username, password) {
@@ -40,13 +41,6 @@ async function getByUsername(username) {
     `, [username]);
     return theUser;
 };
-
-
-
-
-
-
-
 
 
 

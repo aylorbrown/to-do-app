@@ -1,20 +1,17 @@
 const http = require('http');
 const express = require('express');
-const path = require('path');
 const app = express();
 const server = http.createServer(app);
 const PORT = 3000;
 
 const db = require('./models/connection');
 const user = require('./models/user')
+const events = require('./models/events');
 
 const es6Renderer = require('express-es6-template-engine');
 app.engine('html', es6Renderer);
 app.set('views', 'templates');
 app.set('view engine', 'html');
-app.use(express.static(path.join(__dirname, 'public')));
-
-
 
 const bodyParser = require('body-parser');
 const parseForm = bodyParser.urlencoded({
@@ -25,17 +22,10 @@ const parseForm = bodyParser.urlencoded({
 const session = require('express-session'); //session management middleware
 const fileStore = require('session-file-store')(session); // modified version of middleware management and helps save session to file of hard drive
 
-//************TRAVIS*******//
-//pulls in functions from events.js//
-const events = require('./models/events');
 
 
 
-
-
-
-
-// SESSION MANAGEMENT
+// --- SESSION MANAGEMENT
 app.use(session({
     store: new fileStore({}),
     secret: '76260r57650fd743046561076' // must move into secure location
@@ -51,15 +41,22 @@ app.use((req, res, next) =>  {
 
 
 
-// HOME 
+// --- HOME 
 app.get('/', (req, res) => {
-    console.log('You are home!');
-    res.render('home');
+    let errorMsg = ''
+    if (req.query.msg === 'userLogout') {
+        errorMsg = 'You have been signed out!'
+    }
+    res.render('home', {
+        locals: {
+            errorMsg
+        }
+    });
 });
 
 
 
-// SIGNUP
+// --- SIGNUP
 app.get('/signup', (req, res) => { 
     let errorMsg = ''
     if (req.query.msg === 'usernameTaken') {
@@ -88,7 +85,7 @@ app.post('/signup', parseForm, async (req, res) => {
 
 
 
-// LOGIN
+// --- LOGIN
 app.get('/login', (req, res) => {
     let errorMsg = ''
     if (req.query.msg === 'loginInvalid') {
@@ -109,7 +106,7 @@ app.post('/login', parseForm, async (req, res) => {
     try { // try: checks if username has match in db
         const {isUserValid, theUser} = await user.userLogin(username, password);
         console.log(isUserValid);
-        console.log(isUserValid);
+        
 
 
         // if/else checks if password has match in db
@@ -120,12 +117,11 @@ app.post('/login', parseForm, async (req, res) => {
                 username: theUser.user_name,
                 id: theUser.user_id,
                 name: theUser.first_name
+
             };
             console.log("hits req session")
             req.session.save(() => {
                 console.log('The session is now saved!!!');
-                // This avoids a long-standing
-                // bug in the session middleware
                 res.redirect('/profile');
             });
 
@@ -141,56 +137,93 @@ app.post('/login', parseForm, async (req, res) => {
 
 
 
-// PROFILE
+// --- PROFILE
 app.get('/profile', (req, res) => {
     res.render('profile', {
         locals: {
             name: req.session.user.name
         }
-    // res.send(`Welcome back ${req.session.user.name}`) if you want to send user session info to page
     })
 });
 
 
-//****TRAVIS******/
-//below is for listing all events from your  profile page
-
-app.get('/profile/listevents', async (req, res) =>{
+// --- BROWSE EVENTS
+// List All Events - PAGE
+app.get('/profile/listevents', async (req, res) => {
+    // const allEvents = await events.listEvents();
     const allEvents = await events.listEvents();
-    console.log(allEvents);
-    res.send(allEvents);
+    console.log('events -----');
+    console.log(allEvents)
+    res.render('browseEvents', {
+        locals: {
+            allEvents: allEvents
+        }
+    })
 });
 
+// --- CREATE AN EVENT
+// < STEP 1 >
+// Create An Event - PAGE
 app.get('/profile/createevent', async (req, res) => {
-    res.render('createEvent');
-})
+    res.render('createEvent')
+});
 
+// Create An Event - FORM
 app.post('/profile/createevent', parseForm, async (req, res) => {
+    const userID = req.session.user.id;
     const {eventName, eventLocation, eventDate, eventTime, eventDescription} = req.body;
     try{
-     console.log(req.body);
-     const newEvent = await events.createEvent(eventName, eventLocation, eventDate, eventTime, eventDescription);
-    //  newEvent.command === "INSERT" && newEvent.rowCount >= 1;   
-    //  console.log(newEvent.command);
-    
-    }
+        console.log(req.body);
+        const eventID = await events.createEvent(eventName, eventLocation, eventDate, eventTime, eventDescription, userID);
+        res.redirect(`/profile/createevent/${eventID}/createtask`)
 
-    catch (err){
+    } catch (err){
         console.log(err);
     }
-    
+})
+
+// < STEP 2 > 
+// Create Event Task - PAGE
+app.get('/profile/createevent/:eventID(\\d+)/createtask', async (req, res) => {
+    res.render('createTask');
+});
+
+// Create A Task - FORM
+app.post('/profile/createevent/:eventID(\\d+)/createtask', parseForm, async (req, res) => {
+    const {eventID} = req.params;
+    const {taskList} = req.body;
+
+    try{
+     console.log(req.body);
+     const taskID = await events.createTask(taskList, eventID); 
+     res.render(`eventConfirmation`)
+
+    } catch (err){
+        console.log(err);
+    }
 })
 
 
 
 
 
+// --- SIGN UP FOR TASK
+
+
+// --- VIEW YOUR EVENTS
 
 
 
 
-
-//LOGOUT 
+//--- LOGOUT 
+    // Get rid of the user's session!
+    // Then redirect them to the home page.
+app.get('/logout', (req, res) => {
+    req.session.destroy(() => {
+        console.log('The session is now destroyed!!!');
+        res.redirect('/?msg=userLogout');
+    }); 
+})
 
 
 
