@@ -185,6 +185,24 @@ app.post('/profile/createevent', parseForm, async (req, res) => {
     
 })
 
+// SAVE TASKS TO USER PROFILE
+
+app.post('/profile/createevent', parseForm, async (req, res) => {
+    const {eventName, eventLocation, eventDate, eventTime, eventDescription} = req.body;
+    try{
+     console.log(req.body);
+     const newEvent = await events.createEvent(eventName, eventLocation, eventDate, eventTime, eventDescription);
+    //  newEvent.command === "INSERT" && newEvent.rowCount >= 1;   
+    //  console.log(newEvent.command);
+    
+    }
+
+    catch (err){
+        console.log(err);
+    }
+    
+})
+
 
 
 
