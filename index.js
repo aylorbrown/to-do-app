@@ -189,17 +189,32 @@ app.get('/profile/browseEvents/:eventID(\\d+)/:eventName', async (req, res) => {
     })
 });
 
-// --- VIEW USERS EVENTS
+// --- VIEW USERS EVENTS(CREATOR)
+// app.get('/profile/viewMyEvents', async (req, res) => {
+//     const userID = req.session.user.id;    
+//     const allCreatorEvents = await events.listCreatorEvents(userID);
+//     console.log('All User Events -----');
+//     console.log(allCreatorEvents)
+//     res.send(allCreatorEvents)
+// });
+
+
+// --- VIEW USERS TASKS (PARTICIPANT)
 app.get('/profile/viewMyEvents', async (req, res) => {
-    const userID = req.session.user.id;    
-    const allUserEvents = await events.listUserEvents(userID);
-    console.log('All User Events -----');
-    console.log(allUserEvents)
-    res.send(allUserEvents)
+    const userID = req.session.user.id;  
+    const allCreatorEvents = await events.listCreatorEvents(userID);  
+    const allParticipantEvents = await events.listParticipantTasks(userID);
+    const formatParticipantEventCards = await events.formatParticipantEventCards(allParticipantEvents)
+    console.log('All Participant Events -----');
+    console.log(formatParticipantEventCards)
+    res.render('viewMyEvents', {
+        locals: {
+            allCreatorEvents,
+            allParticipantEvents,
+            formatParticipantEventCards
+        }
+    })
 });
-
-
-// --- VIEW USERS TASKS
 
 
 // --- CREATE AN EVENT
@@ -257,7 +272,6 @@ app.post('/profile/browseEvents/:eventID(\\d+)/:eventName', parseForm, async (re
 });
 
 
-// --- VIEW YOUR EVENTS
 
 
 

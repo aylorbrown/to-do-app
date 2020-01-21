@@ -12,13 +12,14 @@
     <h1 class="text-center">Browse Events</h1>
         ${allEvents.map(item => 
             `
+        <div>
             <form method="POST" >
                 <input name="eventID" value="${item.event_id}" hidden>
                 <input name="eventName" value="${item.event_name}" hidden>
                 <div class="row card-row justify-content-center p">
                     <div class="card text-center col-md-6">
                         <div class="card-header bg-transparent">
-                            ${item.event_description}
+                            ${item.event_name}
                         </div>
                         <div class="card-body">
                             <h5 class="card-title">
@@ -40,15 +41,14 @@
                                 </p>
                             </p>
                             <input type="submit"class="btn btn-primary" value='View Event'/>
-                          </div>
                         </div>
                     </div>
                 </div>
-                <br>
             </form>
+        </div>
+        <br>
             `
             ).join('')}
-    </div>
   
 
 

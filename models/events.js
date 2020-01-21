@@ -35,16 +35,55 @@ async function getTasks(eventID) {
 
 
 //  --- RETRIEVE USERS EVENTS (CREATORS)
-async function listUserEvents(userID){
-    const allUserEvents = await db.any(`
+async function listCreatorEvents(userID){
+    const allCreatorEvents = await db.any(`
     select * from events where user_id=$1`,
     [userID]);
-    console.log(allUserEvents); 
-    return allUserEvents;
+    console.log(allCreatorEvents); 
+    return allCreatorEvents;
 }
 
 // --- RETRIEVE USERS TASKS AND THEIR EVENTS(PARTICIPANT)
+async function listParticipantTasks(userID) {
+    try {
+        const allParticipantTasks = await db.any(`SELECT task_assignment.user_id, tasks.task_id, tasks.task, events.event_id, events.event_name, events.event_description
+        FROM task_assignment
+        INNER JOIN tasks ON tasks.task_id = task_assignment.task_id
+        INNER JOIN events ON events.event_id = tasks.event_id
+        WHERE task_assignment.user_id = $1`, [userID]);
+        console.log(`allParticipantTasks = `)
+        console.log(allParticipantTasks)
+        return allParticipantTasks;
+    } catch (err) {
+        console.log(err);
+    }
+}
 
+
+// --- FORMAT USERS EVENT CARDS
+async function formatParticipantEventCards(allParticipantTasks) {
+    // const eventID = []
+    // for (let item of allParticipantTasks) {
+    //     if (! eventID.includes(item.event_id)) {
+    //         eventID.push(item.eventID)
+    //     } 
+    // }
+    const formattedEventsObj = {}
+    allParticipantTasks.forEach((item) => {
+        if (formattedEventsObj[item.event_id]) {
+            formattedEventsObj[item.event_id].push(item)
+        }else{
+            formattedEventsObj[item.event_id] = [item]
+        }
+    })
+
+    return Object.keys(formattedEventsObj).map(key => {
+        return formattedEventsObj[key]
+    })
+}
+
+
+// 
 
 
 
@@ -94,17 +133,6 @@ async function assignUserToTask(taskID,userID){
 
 
 
-
-
-// --- VIEW YOUR EVENTS
-
-
-
-
-
-
-
-
 // EXPORTS
 module.exports= {
     listEvents,
@@ -113,6 +141,8 @@ module.exports= {
     oneEvent,
     getTasks,
     assignUserToTask,
-    listUserEvents
+    listCreatorEvents,
+    listParticipantTasks,
+    formatParticipantEventCards
 
 }
