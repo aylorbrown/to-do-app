@@ -2,7 +2,7 @@ NAME OF APP?????? You did what now?..Much Ado about Todos...Let's do this...How 
 
 Screenshots:
 
-What problem our app solves?
+What problem does our app solve?
 
 One challenge that non-profit organizations face is managing volunteers. Our app seeks to allow a volunteer coordinator the ability to create an event with tasks so that their volunteers can sign up to help out. While we built this app with non-profits in mind, any company or private individual can use this app to manage events. 
 
