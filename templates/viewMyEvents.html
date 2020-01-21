@@ -9,9 +9,10 @@
     <title>Document</title>
 </head>
 <body>
-    <h1 class="text-center">EVENTS YOU'VE CREATED</h1>
-  
-    ${allCreatorEvents.map(item => 
+    
+    ${allCreatorEvents.length > 0 ? (
+        `<h1 class="text-center">EVENTS YOU'VE CREATED</h1>` +
+        allCreatorEvents.map(item => 
         `
         <div>
             <form method="POST" >
@@ -45,62 +46,43 @@
         </div>
         <br>
         `
-        ).join('')}
+        ).join(''))
+        : ''
+    
+    }
 
 
 
 
 
     <h1 class="text-center">EVENTS YOU'RE ATTENDING</h1>
-    ${formatParticipantEventCards.map(arr => 
-       <!-- '<h1>event.event_name</h1>' +
-       arr.map(event => {
-            ` <p>
-                ${event.task}
-            </p>
+  
+    ${formatParticipantEventCards.map(event => 
             `
-        }).join('') --> 
-        `
-        <p>
-        ${arr}
-        </p>
-        `
-    )}
-
-
-
-
-
-
-
-
-    <!-- ${(formatParticipantEventCards).map(item => 
-        `
-        <div>
-            <form method="POST" >
-                <input name="eventID" value="${item.event_id}" hidden>
-                <div class="row card-row justify-content-center p">
-                    <div class="card text-center col-md-6">
-                        <div class="card-body">
-                            <h5 class="card-title">
-                                 ${item.event_name}
-                            </h5>
-                            <p class="card text">
-                                ${item.task}
-                            </p>
-                            <input type="submit"class="btn btn-primary" value='REMOVE THIS TASK'/>
-                          </div>
-                        </div>
-                    </div>
-                </div>
-                <br>
-            </form>
-        </div>
-        `
-        ).join('')} -->
+              <div>
+               <h1>${event.event_name}</h1>
+               <ul>
+                 ${event.tasks.map(task => `
+                       <li>
+                         <form method="post">
+                           ${task.task}
+                           <input type="hidden" name="taskID" value="${task.id}">
+                           <input type="submit" value="remove" />
+                         </form>
+                       </li>
+                 ` ).join('')}
+               </ul>
+              </div>
+            `).join('')
+          }
+        
+     
 
 
 
 </body>
  
+
+
+
 </html>
