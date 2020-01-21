@@ -274,7 +274,11 @@ app.get('/logout', (req, res) => {
 
 
 
+//----About page--Travis//
 
+app.get('/about', (req, res) => {
+    res.render('about.html');
+})
 
 
 
