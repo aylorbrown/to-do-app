@@ -250,10 +250,11 @@ app.post('/profile/createevent/:eventID(\\d+)/createtask', parseForm, async (req
 app.post('/profile/browseEvents/:eventID(\\d+)/:eventName', parseForm, async (req, res) => {
     console.log('assigning user to task');
     const userID = req.session.user.id;
-    const {taskID, eventID, eventName} = req.body;
+    const {taskID} = req.body;
 
     const assignUserToTask = await events.assignUserToTask(taskID, userID);
-    res.redirect(`/profile/browseEvents/${eventID}/${eventName}`)
+    res.redirect(`/profile/browseEvents/${req.params.eventID}/${req.params.eventName}`)
+    console.log('***********!!!!!!*************');
 });
 
 
