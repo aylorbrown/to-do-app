@@ -12,6 +12,7 @@ Our app allows users to create a profile. Once their profile is created they hav
 
 Our database consists of 4 different data tables. One to store events, one to store user information, and two other linking tables that store tasks of the events and assigns those tasks to users.
 
+
 ##What features you would add next?
 
 The ability to search for events based on location.
