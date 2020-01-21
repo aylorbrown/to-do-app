@@ -166,7 +166,7 @@ app.get('/profile/browseEvents', async (req, res) => {
 // --- VIEW A SINGLE EVENT & ITS TASKS
 
 app.post('/profile/browseEvents', parseForm, async (req, res) => {
-    console.log('you want to get by id');
+    console.log('viewing a single event');
     // show me a single event by their id
     const {eventID, eventName} = req.body;
     const oneEvent = await events.oneEvent(eventID);
@@ -188,7 +188,18 @@ app.get('/profile/browseEvents/:eventID(\\d+)/:eventName', async (req, res) => {
         }
     })
 });
- 
+
+// --- VIEW USERS EVENTS
+app.get('/profile/viewMyEvents', async (req, res) => {
+    const userID = req.session.user.id;    
+    const allUserEvents = await events.listUserEvents(userID);
+    console.log('All User Events -----');
+    console.log(allUserEvents)
+    res.send(allUserEvents)
+});
+
+
+// --- VIEW USERS TASKS
 
 
 // --- CREATE AN EVENT

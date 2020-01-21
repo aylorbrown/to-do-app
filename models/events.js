@@ -9,10 +9,7 @@ async function listEvents(){
 }
 
 
-// Format Events for User
-
-
-// -- RETRIEVE ONE EVENT 
+// -- RETRIEVE ONE EVENT (Browse Events)
 async function oneEvent(eventID) {
     try {
         const oneEvent = await db.one(`select * from events where event_id=$1`, [eventID]);
@@ -24,7 +21,7 @@ async function oneEvent(eventID) {
 }
 
 
-// --- RETRIEVE EVENT TASK INFO
+// --- RETRIEVE EVENT TASK INFO (Browse Events)
 async function getTasks(eventID) {
     try {
         const tasksForEvent = await db.any(`select * from tasks where event_id=$1`, [eventID]);
@@ -34,6 +31,19 @@ async function getTasks(eventID) {
         return null;
     }
 }
+
+
+
+//  --- RETRIEVE USERS EVENTS (CREATORS)
+async function listUserEvents(userID){
+    const allUserEvents = await db.any(`
+    select * from events where user_id=$1`,
+    [userID]);
+    console.log(allUserEvents); 
+    return allUserEvents;
+}
+
+// --- RETRIEVE USERS TASKS AND THEIR EVENTS(PARTICIPANT)
 
 
 
@@ -102,5 +112,7 @@ module.exports= {
     createTask,
     oneEvent,
     getTasks,
-    assignUserToTask
+    assignUserToTask,
+    listUserEvents
+
 }
