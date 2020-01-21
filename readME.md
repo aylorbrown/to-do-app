@@ -1,6 +1,4 @@
-NAME OF APP?????? You did what now?..Much Ado about Todos...Let's do this...How can I help?..
-
-Screenshots:
+How can I help?
 
 What problem does our app solve?
 
@@ -9,7 +7,7 @@ One challenge that non-profit organizations face is managing volunteers. Our app
 
 Description of how the app works.
 
-Our app allows users to create a profile. Once their profile is created they have the ability to create events and tasks for those events. A volunteer then can create a profile and view those events and select what task they would like to complete. 
+Our app allows users to create a profile. Once their profile is created they have the ability to create events and tasks for those events. A volunteer can then view those events and select what task they would like to complete. 
 
 
 Structure of our databases. 
