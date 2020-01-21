@@ -13,6 +13,7 @@ body {
     font-family: 'Karla', sans-serif;
     background-color: rgb(239, 239, 229); 
     font-size: 16px;
+    overflow-y: scroll;
 }
 
 nav {
@@ -30,6 +31,10 @@ nav a {
     background-color: white;
     padding-left: 5px;
     padding-right: 5px;
+}
+
+text-center {
+    top: 0; 
 }
 
 section, html {
@@ -58,6 +63,7 @@ form {
     justify-content: center;
     border: 1px solid black;
     padding: 50px;
+    margin-bottom: 50px;
 }
 
 input {
@@ -78,3 +84,36 @@ input.button {
     display: inline-block;  
 }
 
+
+/*  put important in front */
+/* input.btn btn-primary { 
+    font-family: 'Karla', sans-serif;
+    background-color: rgb(12, 28, 77);
+    color: white;
+    display: inline-block;  
+} */
+
+@media screen and (max-width: 758px) {
+
+}
+
+@media screen and (min-width: 1200px) {
+
+    body {
+        width: 30%; 
+    }
+
+    form { 
+        display: flex; 
+        align-items: center;
+        justify-content: center;
+        flex-direction: row;
+    }
+
+    h1.text center {
+        display: flex; 
+        align-items: center;
+        justify-content: center;
+        
+    }
+}
