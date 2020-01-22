@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
     <title>Document</title>
     <link href="https://fonts.googleapis.com/css?family=Karla&display=swap" rel="stylesheet">    
     <link rel="stylesheet" href="/stylesheets/style.css">
@@ -14,6 +16,97 @@
         <a href="/about">About</a>
     </nav>
 <body>
-    <h1>VIEW YOUR EVENTS</h1>
+    
+    ${allCreatorEvents.length > 0 ? (
+        `<h1 class="text-center">EVENTS YOU'VE CREATED</h1>` +
+        allCreatorEvents.map(item => 
+        `
+        <div>
+            <form method="POST" >
+                <input name="taskID" value="${item.task_id}" hidden>
+                <div class="row card-row justify-content-center">
+                    <div class="card text-center col-md-6">
+                        <div class="card-body">
+                            <h5 class="card-title">
+                                 ${item.event_name}
+                            </h5>
+                            <p class="card-text overflow-auto">
+                                <h5>
+                                    Location:
+                                </h5> 
+                                <p c>
+                                    ${item.event_location}
+                                </p>
+                                <br>
+                                <h5>
+                                    Despcription:
+                                </h5> 
+                               
+                                    <input class="text-center"  contenteditable="false" value="${item.event_description}" disabled> 
+                                
+                            </p>
+                            <input type="submit"class="btn btn-primary" value='EDIT THIS EVENT'/>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <br>
+        `
+        ).join(''))
+        : ''
+    
+    }
+
+
+
+
+
+    ${formatParticipantEventCards.length > 0 ? (
+        `<h1 class="text-center">EVENTS YOU'RE ATTENDING</h1>` +
+  
+        formatParticipantEventCards.map(event => 
+            `
+            
+                <div class="row card-row justify-content-center">
+                    <div class="col-sm-6">
+                        <div class="card text-center">
+                            <h5 class="card-header">
+                                ${event.event_name}
+                            </h5>
+                            <div class="card-body"> 
+                                <ul class="list-group list-group-flush">
+                                    ${event.tasks.map(task => `
+                                        <li class="list-group-item">
+                                            <form method="POST">
+                                                ${task.task}
+                                                <input name="taskID" type="" value="${task.task_id}"/>
+                                                <br>
+                                                <input class="btn btn-primary" type="submit" value="remove" />
+                                            </form>
+                                        </li>
+                                        
+                                    ` ).join('')}
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+          
+            <br>
+                `).join(''))
+                : ''
+            
+          }
+    
+        
+     
+
+
+
 </body>
+ 
+
+
+
 </html>

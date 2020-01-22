@@ -189,17 +189,39 @@ app.get('/profile/browseEvents/:eventID(\\d+)/:eventName', async (req, res) => {
     })
 });
 
-// --- VIEW USERS EVENTS
+
+
+// --- VIEW USERS TASKS (PARTICIPANT)
 app.get('/profile/viewMyEvents', async (req, res) => {
-    const userID = req.session.user.id;    
-    const allUserEvents = await events.listUserEvents(userID);
-    console.log('All User Events -----');
-    console.log(allUserEvents)
-    res.send(allUserEvents)
+    const userID = req.session.user.id;  
+    const allCreatorEvents = await events.listCreatorEvents(userID);  
+    const allParticipantEvents = await events.listParticipantTasks(userID);
+    const formatParticipantEventCards = await events.formatParticipantEventCards(allParticipantEvents, userID)
+    console.log('All Participant Events -----');
+    console.log(formatParticipantEventCards)
+    // res.send('test')
+    res.render('viewMyEvents', {
+        locals: {
+            allCreatorEvents,
+            formatParticipantEventCards
+        }
+    })
 });
 
 
-// --- VIEW USERS TASKS
+// --- UPDATE EVENT (CREATOR)
+
+
+// --- REMOVE AN EVENT (PARTICIPANT) -BUGGGGG
+app.post('/profile/viewMyEvents', parseForm, async (req, res) => {
+    console.log('parsing form')
+    const userID = req.session.user.id; 
+    let {taskID} = req.body;
+    taskID = parseInt(taskID)
+    events.deleteParticipantTask(taskID, userID);
+    console.log('Task Deleted -----');
+    res.redirect('/profile/viewMyEvents')
+})
 
 
 // --- CREATE AN EVENT
@@ -258,7 +280,6 @@ app.post('/profile/browseEvents/:eventID(\\d+)/:eventName', parseForm, async (re
 });
 
 
-// --- VIEW YOUR EVENTS
 
 
 
