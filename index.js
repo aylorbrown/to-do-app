@@ -196,21 +196,32 @@ app.get('/profile/viewMyEvents', async (req, res) => {
     const userID = req.session.user.id;  
     const allCreatorEvents = await events.listCreatorEvents(userID);  
     const allParticipantEvents = await events.listParticipantTasks(userID);
-    const formatParticipantEventCards = await events.formatParticipantEventCards(allParticipantEvents)
+    const formatParticipantEventCards = await events.formatParticipantEventCards(allParticipantEvents, userID)
     console.log('All Participant Events -----');
     console.log(formatParticipantEventCards)
     // res.send('test')
     res.render('viewMyEvents', {
         locals: {
             allCreatorEvents,
-            allParticipantEvents,
             formatParticipantEventCards
         }
     })
 });
 
 
-// --- EDIT EVENT (CREATOR)
+// --- UPDATE EVENT (CREATOR)
+
+
+// --- REMOVE AN EVENT (PARTICIPANT) -BUGGGGG
+app.post('/profile/viewMyEvents', parseForm, async (req, res) => {
+    console.log('parsing form')
+    const userID = req.session.user.id; 
+    let {taskID} = req.body;
+    taskID = parseInt(taskID)
+    events.deleteParticipantTask(taskID, userID);
+    console.log('Task Deleted -----');
+    res.redirect('/profile/viewMyEvents')
+})
 
 
 // --- CREATE AN EVENT

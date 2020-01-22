@@ -17,26 +17,26 @@
         <div>
             <form method="POST" >
                 <input name="taskID" value="${item.task_id}" hidden>
-                <div class="row card-row justify-content-center p">
+                <div class="row card-row justify-content-center">
                     <div class="card text-center col-md-6">
                         <div class="card-body">
-                                      <h5 class="card-title">
+                            <h5 class="card-title">
                                  ${item.event_name}
                             </h5>
                             <p class="card-text overflow-auto">
                                 <h5>
                                     Location:
                                 </h5> 
-                                <p>
+                                <p c>
                                     ${item.event_location}
                                 </p>
                                 <br>
                                 <h5>
                                     Despcription:
                                 </h5> 
-                                <p>
-                                    ${item.event_description}
-                                </p>
+                               
+                                    <input class="text-center"  contenteditable="false" value="${item.event_description}" disabled> 
+                                
                             </p>
                             <input type="submit"class="btn btn-primary" value='EDIT THIS EVENT'/>
                         </div>
@@ -55,26 +55,43 @@
 
 
 
-    <h1 class="text-center">EVENTS YOU'RE ATTENDING</h1>
+    ${formatParticipantEventCards.length > 0 ? (
+        `<h1 class="text-center">EVENTS YOU'RE ATTENDING</h1>` +
   
-    ${formatParticipantEventCards.map(event => 
+        formatParticipantEventCards.map(event => 
             `
-              <div>
-               <h1>${event.event_name}</h1>
-               <ul>
-                 ${event.tasks.map(task => `
-                       <li>
-                         <form method="post">
-                           ${task.task}
-                           <input type="hidden" name="taskID" value="${task.id}">
-                           <input type="submit" value="remove" />
-                         </form>
-                       </li>
-                 ` ).join('')}
-               </ul>
-              </div>
-            `).join('')
+            
+                <div class="row card-row justify-content-center">
+                    <div class="col-sm-6">
+                        <div class="card text-center">
+                            <h5 class="card-header">
+                                ${event.event_name}
+                            </h5>
+                            <div class="card-body"> 
+                                <ul class="list-group list-group-flush">
+                                    ${event.tasks.map(task => `
+                                        <li class="list-group-item">
+                                            <form method="POST">
+                                                ${task.task}
+                                                <input name="taskID" type="" value="${task.task_id}"/>
+                                                <br>
+                                                <input class="btn btn-primary" type="submit" value="remove" />
+                                            </form>
+                                        </li>
+                                        
+                                    ` ).join('')}
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+          
+            <br>
+                `).join(''))
+                : ''
+            
           }
+    
         
      
 
