@@ -46,13 +46,13 @@ section, html {
 
 }
 
+
 div.profile {
     display: flex; 
     align-items: center;
     justify-content: center;
     height: 100vh;
 }
-
 
 div.card-body { 
     width: 50%;
@@ -64,11 +64,9 @@ h1.text-center {
     justify-content: center;
 }
 
-
 ul { 
     list-style: none; 
 }
-
 
 form {
     display: flex;
@@ -79,10 +77,12 @@ form {
     margin-bottom: 50px;
 }
 
+
 form.jonathan {
     display: flex; 
     flex-direction: column;
 }
+
 
 input {
     border: 1px solid black;
@@ -165,10 +165,6 @@ input.button {
     div.card text-center col-md-6 {
         width: 200px;
     }
+        
 }
-
-
-
-
-
 

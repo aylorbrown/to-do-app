@@ -6,6 +6,6 @@ VALUES
 insert into events
     (event_name, event_location, event_date, event_time, event_description, user_id)
 VALUES
-    ('thanksgiving', 'my house', '2020-01-17', '05:00 PM', 'jobs for jobies', 1);
+    ('thanksgiving', 'my house', '2020-01-17', '05:00 PM', 'a thanksgiving dinner for people in need', 1);
 
 
