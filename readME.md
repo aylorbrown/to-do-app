@@ -8,23 +8,23 @@ One challenge that non-profit organizations face is managing volunteers and even
 
 ## Description of how the app works.
 
-Homepage:  
+### Homepage:  
 
 ![homePage](public/homePage.png)
 
-Our app allows users to create a profile.
+### Our app allows users to create a profile.
 
 ![createProfile](public/createProfile.png)
 
-Once their profile is created they have the ability to create events and tasks for those events.
+### Once their profile is created they have the ability to create events and tasks for those events.
 
 ![createEvent](public/createEvent.png)
 
-A volunteer can then view those events and select what task they would like to complete.
+### A volunteer can then view those events and select what task they would like to complete.
 
 ![browseEvents](public/browseEvents.png)
 
-Then our users are able to view the events they've created and the events they are attending.
+### Then our users are able to view the events they've created and the events they are attending.
 ![viewEvents](public/viewEvents.png)
 
 ## Structure of our databases.
