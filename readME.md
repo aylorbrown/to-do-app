@@ -25,7 +25,6 @@ A volunteer can then view those events and select what task they would like to c
 ![browseEvents](public/browseEvents.png)
 
 Then our users are able to view the events they've created and the events they are attending.
-
 ![viewEvents](public/viewEvents.png)
 
 ## Structure of our databases.
