@@ -10,16 +10,23 @@
 </head>
 
 <body onload="createTable()">
-    <div>
-        <input type="button" id="addRow" value="Add Task" onclick="addRow()" />
-    </div>
     <!--THE FORM WHERE WE'll ADD THE DYNAMIC TABLE-->
-    <form method="POST" >
-        <div id="cont">
-            <!-- Task Table -->
-        </div>
-        <input type="submit" id="bt" value="SUBMIT EVENT (STEP 3)"/>
-    </form>
+    <section>
+            <div>
+                <input class="button" type="button" id="addRow" value="Add Task" onclick="addRow()" />
+            </div>
+            <br>
+            <br>
+            <br>
+        <form method="POST" >
+            <div id="cont">
+                <!-- Task Table -->
+            </div>
+            <div class="addtask">
+                <input class="button" type="submit" id="bt" value="SUBMIT EVENT (STEP 3)"/>
+            </div>
+        </form>
+    </section>
 </body>
 
 

@@ -4,11 +4,6 @@
     box-sizing: border-box; 
 }
 
-/* @font-face {
-    font-family: "Apfel-Grotezk";
-    src: url(/public/ApfelGrotezk-Regular.woff2), url(/public/ApfelGrotezk-Regular.woff);
-} */
-
 body { 
     font-family: 'Karla', sans-serif;
     background-color: rgb(239, 239, 229); 
@@ -46,11 +41,18 @@ section, html {
 }
 
 
+
 div.profile {
     display: flex; 
     align-items: center;
     justify-content: center;
     height: 100vh;
+}
+
+h1.text-center { 
+    display: flex; 
+    align-items: center;
+    justify-content: center;
 }
 
 
@@ -59,12 +61,14 @@ div.profile {
 
 
 form {
+    display: flex;
     align-items: center;
     justify-content: center;
     border: 1px solid black;
-    padding: 50px;
+    padding: 30px;
     margin-bottom: 50px;
 }
+
 
 input {
     border: 1px solid black;
@@ -75,7 +79,9 @@ button {
     background-color: rgb(12, 28, 77);
     color: white;
     display: inline-block;  
+    /* width: 100px; */
 }
+
 
 input.button { 
     font-family: 'Karla', sans-serif;
@@ -85,14 +91,6 @@ input.button {
 }
 
 
-/*  put important in front */
-/* input.btn btn-primary { 
-    font-family: 'Karla', sans-serif;
-    background-color: rgb(12, 28, 77);
-    color: white;
-    display: inline-block;  
-} */
-
 @media screen and (max-width: 758px) {
 
 }
@@ -100,20 +98,52 @@ input.button {
 @media screen and (min-width: 1200px) {
 
     body {
-        width: 30%; 
+        width: 100%; 
     }
 
-    form { 
-        display: flex; 
-        align-items: center;
-        justify-content: center;
-        flex-direction: row;
+    section {
+        overflow-y: scroll;
     }
 
-    h1.text center {
-        display: flex; 
-        align-items: center;
-        justify-content: center;
+    form {
+        padding: 100px;
+        width: 90%;
+    }
+
+    form.browse { 
+        width: 50%;
+        margin: 40px 350px 40px 350px;
+        /* margin: 40px 500px 40px 500px;
+        width: 50%;
         
+    }
+
+    /* h1.text-center {
+        width: 400px;
+        margin: 40px 500px 40px 850px;
+
+    } */
+
+    label {
+        padding: 10px; 
+    }
+
+    input addtask.button {
+        margin: 0;
+        top: 50%;
+        position: relative; 
+    }
+
+    input.password {
+        margin: 0 10px 0 10px;
+    }
+
+    div.button { 
+        display: flex;
+        flex-direction: row; 
+    }
+
+    div.card text-center col-md-6 {
+        width: 200px;
     }
 }

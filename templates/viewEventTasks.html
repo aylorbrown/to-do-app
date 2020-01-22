@@ -18,7 +18,7 @@
     <h1 class="text-center">${eventName}</h1>
     ${tasksForEvent.map(item => 
         `
-        <form method="POST" >
+        <form class="browse" method="POST" >
             <input name="taskID" value="${item.task_id}" hidden>
             <input name="tasksForEvent" value="${tasksForEvent}" hidden>
             <input name="eventID" value="${eventID}" hidden>

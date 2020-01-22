@@ -15,8 +15,9 @@
 </nav>
 <body>
 
-
-    <form method="POST">
+<section>
+  <form method="POST">
+    <div class=labels>
       <label>
         Event Name:
         <input name="eventName">
@@ -28,26 +29,31 @@
         <input name="eventLocation">
       </label>
       <br>
-
+  
       <label>
         Event Date:
         <input name="eventDate", type="date" >
       </label>
       <br>
-
+  
       <label>
         Event Time:
-      <br>
         <input name="eventTime", type="time">
       </label>
       <br>
-
+  
       <label>
         Event Description:
           <input name="eventDescription">
       </label>
       <br>
         <input class="button" type="submit">
-    </form>
+    </div>
+  </form>
+  
+</section>
+
+
+
 </body>
 </html>
