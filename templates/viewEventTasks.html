@@ -12,33 +12,35 @@
 </head>
 <nav>
     <!-- aylor -->
-    <a href="/">Home</a>
+    <a href="/profile">Home</a>
     <a href="/about">About</a>
 </nav>
 <body>
-    <h1 class="text-center">${eventName}</h1>
-    ${tasksForEvent.map(item => 
-        `
-        <form class="browse" method="POST" >
-            <input name="taskID" value="${item.task_id}" hidden>
-            <input name="tasksForEvent" value="${tasksForEvent}" hidden>
-            <input name="eventID" value="${eventID}" hidden>
-            <input name="eventName" value="${eventName}" hidden>
-            <div class="row card-row justify-content-center p">
-                <div class="card text-center col-md-6">
-                    <div class="card-body">
-                        <h5 class="card-title">
-                             ${item.task}
-                        </h5>
-                        <input id="mybtn" type="submit" class="button" value='VOLUNTEER FOR THIS TASK'/>
-                    </div>
+    <div>
+        <h1 class="text-center">${eventName}</h1>
+        ${tasksForEvent.map(item => 
+            `
+            <form class= "browse" method="POST" >
+                <input name="taskID" value="${item.task_id}" hidden>
+                <input name="tasksForEvent" value="${tasksForEvent}" hidden>
+                <input name="eventID" value="${eventID}" hidden>
+                <input name="eventName" value="${eventName}" hidden>
+                <div class="row card-row justify-content-center p">
+                    <div class="card text-center col-md-6">
+                        <div class="card-body">
+                            <h5 class="card-title">
+                                 ${item.task}
+                            </h5>
+                            <input id="mybtn" type="submit" class="button" value='VOLUNTEER FOR THIS TASK'/>
+                        </div>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <br>
-        </form>
-        `
-        ).join('')}
+                <br>
+            </form>
+            `
+            ).join('')}
+    </div>
 
 
 

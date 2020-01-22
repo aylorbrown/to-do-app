@@ -40,6 +40,11 @@ section, html {
     height: 100vh;
 }
 
+.partners {
+    padding-bottom: 20px;
+    padding-top: 200px;
+
+}
 
 
 div.profile {
@@ -49,12 +54,19 @@ div.profile {
     height: 100vh;
 }
 
+div.card-body { 
+    width: 50%;
+}
+
 h1.text-center { 
     display: flex; 
     align-items: center;
     justify-content: center;
 }
 
+ul { 
+    list-style: none; 
+}
 
 form {
     display: flex;
@@ -63,6 +75,12 @@ form {
     border: 1px solid black;
     padding: 30px;
     margin-bottom: 50px;
+}
+
+
+form.jonathan {
+    display: flex; 
+    flex-direction: column;
 }
 
 
@@ -109,19 +127,19 @@ input.button {
     form.browse { 
         width: 50%;
         margin: 40px 350px 40px 350px;
-        /* margin: 40px 500px 40px 500px;
-        width: 50%;
-        
     }
 
+    form.jonathan {
+        width: 50%;
+    }
+    
     /* h1.text-center {
         width: 400px;
         margin: 40px 500px 40px 850px;
+    }  */
 
-    } */
-
-    label {
-        padding: 10px; 
+    p { 
+        width: 50%;
     }
 
     input addtask.button {
@@ -129,6 +147,11 @@ input.button {
         top: 50%;
         position: relative; 
     }
+
+    div.labels { 
+        padding: 10px;
+    }
+
 
     input.password {
         margin: 0 10px 0 10px;
@@ -142,4 +165,6 @@ input.button {
     div.card text-center col-md-6 {
         width: 200px;
     }
+        
 }
+
