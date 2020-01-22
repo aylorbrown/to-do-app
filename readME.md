@@ -30,6 +30,9 @@ Our database consists of 4 different data tables. One to store events, one to st
 
 ## What features you would add next?
 
-The ability to search for events based on location.
+The ability to search for events based on location and organization.
 
-## Contributors include: Aylor Brown (@aylorbrown), Catie Evans (@evanscatie), and Travis Franklin (@Travis-Franklin)
+Restructure the user profiles so that a user can operate under an organization, and not as an individual profile. This would allow a user to view all events assigned to an organization and give admin abilities to the organization over user accounts.
+
+
+### Contributors include: Aylor Brown (@aylorbrown), Catie Evans (@evanscatie), and Travis Franklin (@Travis-Franklin)
