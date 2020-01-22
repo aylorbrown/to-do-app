@@ -60,34 +60,28 @@
         `<h1 class="text-center">EVENTS YOU'RE ATTENDING</h1>` +
         formatParticipantEventCards.map(event => 
         `
-        <ul>
             ${event.tasks.map(task => `
-        <li>
-    <div>
-        <form class="browse jonathan" method="POST">
-            <h5 class="event-title">
-                ${event.event_name}
-            </h5>
-            <h5>${task.task}</h5>
+                    <div>
+                        <form class="browse jonathan" method="POST">
+                            <h5 class="event-title">
+                                ${event.event_name}
+                            </h5>
+                            <h5>${task.task}</h5>
 
         
-        <input name="taskID" type="" value="${task.task_id}" hidden/>
+                            <input name="taskID" type="" value="${task.task_id}" hidden/>
+                            <br>
+                            <input class="button" type="submit" value="remove" hidden/>
+                        </form>
+                    </div>
+                     
+            ` ).join('')}
             <br>
-        <input class="button" type="submit" value="remove" hidden/>
-   
-            </li>
-                                        
-                ` ).join('')}
-                </ul>
-            <br>
-                `).join(''))
-                : ''
+        `).join(''))
+    : ''
             
-          } 
-        </div>
-    </div>
-    </form>
-</div>  
+    } 
+</div>
  
 
 
