@@ -276,7 +276,6 @@ app.post('/profile/browseEvents/:eventID(\\d+)/:eventName', parseForm, async (re
 
     const assignUserToTask = await events.assignUserToTask(taskID, userID);
     res.redirect(`/profile/browseEvents/${req.params.eventID}/${req.params.eventName}`)
-    console.log('***********!!!!!!*************');
 });
 
 
