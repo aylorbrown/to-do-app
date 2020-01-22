@@ -10,7 +10,7 @@ One challenge that non-profit organizations face is managing volunteers and even
 
 Our app allows users to create a profile. 
 
-<!-- ![Screenshot without results-large](images/screenshot-large.png) -->
+![homePage](public/homePage.png)
 
 Once their profile is created they have the ability to create events and tasks for those events.
 
